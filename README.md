@@ -1,28 +1,30 @@
-# Contains Duplicate
+# Valid Anagram
 
 ## Signature
 
 ```go
-func containsDuplicate(nums []int) bool
+func isAnagram(s string, t string) bool
 ```
 
 ---
 
 ## The Challenge
 
-Given an integer slice `nums`, return `true` if **any value appears at least twice**, and `false` if every element is distinct.
+Given two strings `s` and `t`, return `true` if `t` is an **anagram** of `s`, and `false` otherwise.
 
-Your solution must achieve the required complexity bounds without relying on sorting or any external packages.
+An anagram is a word formed by rearranging the letters of another, using **every original letter exactly once**. Both strings are assumed to contain only lowercase English letters.
 
 ---
 
 ## Constraints
 
-| Property         | Requirement              |
-|------------------|--------------------------|
-| Time Complexity  | $O(n)$                   |
-| Space Complexity | $O(n)$ extra space       |
-| Forbidden        | Do not use the `sort` package |
+| Property         | Requirement                    |
+|------------------|--------------------------------|
+| Time Complexity  | $O(n)$                         |
+| Space Complexity | $O(1)$ extra space             |
+| Forbidden        | Do not use the `sort` package  |
+
+> **Note on space:** Since the input is restricted to 26 lowercase English letters, a fixed-size frequency array counts as $O(1)$ space regardless of input length.
 
 ---
 
@@ -30,19 +32,19 @@ Your solution must achieve the required complexity bounds without relying on sor
 
 **Example 1**
 ```
-Input:  nums = [1, 2, 3, 1]
+Input:  s = "anagram", t = "nagaram"
 Output: true
 ```
 
 **Example 2**
 ```
-Input:  nums = [1, 2, 3, 4]
+Input:  s = "rat", t = "car"
 Output: false
 ```
 
 **Example 3**
 ```
-Input:  nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+Input:  s = "listen", t = "silent"
 Output: true
 ```
 
@@ -50,6 +52,7 @@ Output: true
 
 ## Notes
 
-- If `nums` is **empty** or contains a **single element**, return `false` — no duplicate can exist.
-- The function must handle large slices efficiently; a nested-loop approach is not acceptable.
-- Focus on a data structure that allows $O(1)$ average-case lookups.
+- If `s` and `t` differ in **length**, return `false` immediately — no further processing is needed.
+- If either string is **empty**, return `true` only if both are empty.
+- Your solution should perform a **single pass** (or two linear passes at most) — avoid any $O(n^2)$ character comparison approach.
+- Think about how a **fixed-size array** indexed by character value can track letter frequencies efficiently.
